@@ -1,2 +1,2 @@
 # corona
-Corona virus related dashboards
+Corona virus related dashboards for personal use.

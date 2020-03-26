@@ -44,4 +44,11 @@ class RapidApi(object):
         res = self._make_request("latest_stat_by_country", params)
         return res.json()
 
+class AnandApi(object):
+    """Helper for Anand's India Data"""
 
+    def india_stats(self):
+        url = "http://covid19-india.anandology.com/cases/live"
+
+        results = requests.get(url)
+        return results.json()

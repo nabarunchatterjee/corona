@@ -1,7 +1,8 @@
 from datetime import datetime
 from prometheus_client import CollectorRegistry, Gauge
 from prometheus_client.core import GaugeMetricFamily
-from corona.helper import RapidApi
+from corona.helper import RapidApi, AnandApi
+from corona.config import indian_states_abbr
 
 class Collector(object):
 
@@ -13,7 +14,7 @@ class Collector(object):
 
     def _get_timestamp(self, timestring, timeformat):
         stat_time = datetime.strptime(timestring, timeformat)
-        return datetime.timestamp(stat_time) + 330 * 60
+        return datetime.timestamp(stat_time)
 
 
     def _world_metrics(self):
@@ -55,13 +56,46 @@ class Collector(object):
                                       timestamp)
                     yield metric
 
-
-
-
-
     def collect(self):
         yield from self._world_metrics()
         yield from self._countrywise_metrics()
+
+
+class IndiaCollector(object):
+
+    def __init__(self):
+        self._api_helper = AnandApi()
+        self._metric_prefix = "india_coronavirus_"
+
+
+    def _india_metrics(self):
+        country = "India"
+        india_stats = self._api_helper.india_stats()
+
+        timestamp = datetime.timestamp(datetime.now())
+
+
+        for key, value in india_stats["india"].items():
+            metric_name = self._metric_prefix + "total_" + key
+            metric = GaugeMetricFamily(metric_name,
+                                        "%s for coronavirus in India" % key,
+                                        value=value)
+            yield metric
+
+        for st, state_value in india_stats["states"].items():
+            state = indian_states_abbr[st]
+            for stat, number in state_value.items():
+                metric_name = self._metric_prefix + stat
+                metric = GaugeMetricFamily(metric_name,
+                                           "%s cases for coronavirus in Indian states" % key,
+                                           labels = ["state"])
+                metric.add_metric([state], number)
+                yield metric
+
+
+    def collect(self):
+        yield from self._india_metrics()
+
 
 if __name__ == "__main__":
     coll = Collector()

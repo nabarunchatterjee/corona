@@ -71,8 +71,14 @@ class IndiaCollector(object):
     def _india_metrics(self):
         country = "India"
         india_stats = self._api_helper.india_stats()
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
+        last_updated_time = datetime.strptime(india_stats["last_updated"],
+                                              time_format )
+        time_diff = (datetime.now() - last_updated_time) / 60
 
-        timestamp = datetime.timestamp(datetime.now())
+        yield GaugeMetricFamily("india_stats_last_update",
+                                "last update time for india coronavirus stats",
+                                value=int(time_diff.seconds))
 
 
         for key, value in india_stats["india"].items():

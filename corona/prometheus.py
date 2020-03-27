@@ -2,7 +2,7 @@ from datetime import datetime
 from prometheus_client import CollectorRegistry, Gauge
 from prometheus_client.core import GaugeMetricFamily
 from corona.helper import RapidApi, AnandApi
-from corona.config import indian_states_abbr
+from corona.config import indian_states_abbr, country_code_map
 
 class Collector(object):
 
@@ -48,10 +48,14 @@ class Collector(object):
                 if key not in ["country_name", "region"]:
                     clean_value = float(value.replace(",", ""))
                     metric_name = self._metric_prefix + key
+                    if country not in country_code_map:
+                        continue
+                    else:
+                        code = country_code_map[country]
                     metric = GaugeMetricFamily(metric_name,
                                             "%s for coronavirus" % key,
-                                            labels = ["country", "region"])
-                    metric.add_metric([country, region],
+                                            labels = ["country", "region", "code"])
+                    metric.add_metric([country, region, code],
                                       clean_value,
                                       timestamp)
                     yield metric

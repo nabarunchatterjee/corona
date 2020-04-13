@@ -1,0 +1,2208 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1586769372415,
+  "links": [],
+  "panels": [
+    {
+      "content": "The code behind this dashboard can be found at https://github.com/nabarunchatterjee/corona\n\nUsage: The data for a different country can be found by changing the country variable at the top of the page.\n\nThe data presented here is a representation of the data pulled from the api present at https://rapidapi.com/astsiatsko/api/coronavirus-monitor/endpoints\n\n",
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 39,
+      "mode": "markdown",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Read This",
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 14,
+      "panels": [],
+      "title": "Countrywise Stats (Change country at the  top of the page) [Click to expand/fold]",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_cases{country=\"$country\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset $duration",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{$duration}} ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} - (coronavirus_cases{country=\"$country\"} offset $duration)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Cases ($country)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset $duration",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "$duration ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} - (coronavirus_deaths{country=\"$country\"} offset $duration)",
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Deaths ($country)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_active_cases{country=\"$country\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_active_cases{country=\"$country\"} offset $duration",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{$duration}} ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_active_cases{country=\"$country\"} - (coronavirus_active_cases{country=\"$country\"} offset $duration)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active Cases ($country)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 100000000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset $duration",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "$duration ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} - (coronavirus_total_recovered{country=\"$country\"} offset $duration)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Recovered ($country)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_cases_per_1m_population{country=\"$country\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Cases/1million population ($country)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_serious_critical{country=\"$country\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Seriously Critical Cases ($country)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 43,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_cases{country=\"$country\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset 24h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "1d ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset 48h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "2d ago",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset 72h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "3d ago",
+          "refId": "D"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset 96h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "4d ago",
+          "refId": "E"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset 120h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "5d ago",
+          "refId": "F"
+        },
+        {
+          "expr": "coronavirus_cases{country=\"$country\"} offset 144h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "6d ago",
+          "refId": "G"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "$country Total Cases Trends",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 44,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset 24h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "1d ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset 48h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "2d ago",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset 72h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "3d ago",
+          "refId": "D"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset 96h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "4d ago",
+          "refId": "E"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset 120h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "5d ago",
+          "refId": "F"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"} offset 144h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "6d ago",
+          "refId": "G"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "$country Deaths Trends",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 21
+      },
+      "id": 45,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-red",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset 24h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "1d ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset 48h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "2d ago",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset 72h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "3d  ago",
+          "refId": "D"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset 96h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "4d ago",
+          "refId": "E"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset 120h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "5d ago",
+          "refId": "F"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"} offset 144h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "6d ago",
+          "refId": "G"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "$country Recovered Trends",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 29
+      },
+      "hiddenSeries": false,
+      "id": 50,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "coronavirus_cases{country=\"$country\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"}",
+          "interval": "",
+          "legendFormat": "Deaths",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_active_cases{country=\"$country\"}",
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"}",
+          "interval": "",
+          "legendFormat": "Recovered",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$country Trend (Linear)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 29
+      },
+      "hiddenSeries": false,
+      "id": 55,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "coronavirus_cases{country=\"$country\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_deaths{country=\"$country\"}",
+          "interval": "",
+          "legendFormat": "Deaths",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_active_cases{country=\"$country\"}",
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_total_recovered{country=\"$country\"}",
+          "interval": "",
+          "legendFormat": "Recovered",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$country Trend (Logarithmic)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 10,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 12,
+      "panels": [],
+      "title": "World Stats (Click To Expand/Fold)",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 38
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_cases{region=\"world\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_cases{region=\"world\"} offset $duration",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "$duration ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_cases{region=\"world\"} - (coronavirus_total_cases{region=\"world\"} offset $duration)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Cases (World)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 38
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_deaths{region=\"world\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_deaths{region=\"world\"} offset $duration",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "$duration ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_deaths{region=\"world\"} - (coronavirus_total_deaths{region=\"world\"} offset $duration)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Deaths (World)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 38
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 800000000000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset $duration",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "$duration ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} - (coronavirus_total_recovered{region=\"world\"} offset $duration)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Increase",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Recovered (World)",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 43
+      },
+      "id": 41,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_cases",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_cases offset 24h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "1d ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_cases offset 48h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "2d ago",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_total_cases offset 72h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "3d ago",
+          "refId": "D"
+        },
+        {
+          "expr": "coronavirus_total_cases offset 96h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "4d ago",
+          "refId": "E"
+        },
+        {
+          "expr": "coronavirus_total_cases offset 120h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "5d ago",
+          "refId": "F"
+        },
+        {
+          "expr": "coronavirus_total_cases offset 144h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "6d ago",
+          "refId": "G"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "World Trend Total Cases",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 43
+      },
+      "id": 46,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_deaths",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_deaths offset 24h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "1d ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_deaths offset 48h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "2d ago",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_total_deaths offset 72h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "3d ago",
+          "refId": "D"
+        },
+        {
+          "expr": "coronavirus_total_deaths offset 96h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "4d ago",
+          "refId": "E"
+        },
+        {
+          "expr": "coronavirus_total_deaths offset 120h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "5d ago",
+          "refId": "F"
+        },
+        {
+          "expr": "coronavirus_total_deaths offset 144h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "6d ago",
+          "refId": "G"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "World Trend Deaths",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 43
+      },
+      "id": 47,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80000000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Now",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset 24h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "1d ago",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset 48h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "2d ago",
+          "refId": "C"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset 72h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "3d ago",
+          "refId": "D"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset 96h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "4d ago",
+          "refId": "E"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset 120h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "5d ago",
+          "refId": "F"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"} offset 144h",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "6d ago",
+          "refId": "G"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "World Trend Recovered",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 51
+      },
+      "hiddenSeries": false,
+      "id": 49,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "coronavirus_total_cases",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_deaths",
+          "interval": "",
+          "legendFormat": "Deaths",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"}",
+          "interval": "",
+          "legendFormat": "Recovered",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "World Trend (Linear)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 51
+      },
+      "hiddenSeries": false,
+      "id": 56,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "coronavirus_total_cases",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "expr": "coronavirus_total_deaths",
+          "interval": "",
+          "legendFormat": "Deaths",
+          "refId": "B"
+        },
+        {
+          "expr": "coronavirus_total_recovered{region=\"world\"}",
+          "interval": "",
+          "legendFormat": "Recovered",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "World Trend (Logarithmic)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 10,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 29,
+      "panels": [],
+      "title": "Top 10 (Click to expand/fold)",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 60
+      },
+      "id": 27,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 5000
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 15000
+                },
+                {
+                  "color": "red",
+                  "value": 50000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(10, coronavirus_cases))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{country}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Cases",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 60
+      },
+      "id": 30,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 5000
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 15000
+                },
+                {
+                  "color": "red",
+                  "value": 50000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(10, coronavirus_active_cases))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{country}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active Cases",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 60
+      },
+      "id": 31,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 5000
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 15000
+                },
+                {
+                  "color": "red",
+                  "value": 50000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(10, coronavirus_total_recovered{region=\"\"}))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{country}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Recovered",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 69
+      },
+      "id": 32,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 500
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 1000
+                },
+                {
+                  "color": "red",
+                  "value": 5000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(10, coronavirus_deaths))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{country}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Deaths",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 69
+      },
+      "id": 33,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 5000
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 15000
+                },
+                {
+                  "color": "red",
+                  "value": 50000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(10, coronavirus_total_cases_per_1m_population))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{country}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Cases/ 1 million",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 69
+      },
+      "id": 34,
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 5000
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 15000
+                },
+                {
+                  "color": "red",
+                  "value": 50000
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(10, (sum by (country) (coronavirus_cases)) - (sum by (country) (coronavirus_cases offset $duration))))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{country}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Increase in Total Cases in $duration",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 78
+      },
+      "id": 52,
+      "panels": [],
+      "title": "World Map",
+      "type": "row"
+    },
+    {
+      "circleMaxSize": "25",
+      "circleMinSize": "10",
+      "colors": [
+        "#37872D",
+        "#E0B400",
+        "#E02F44"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "esMetric": "Count",
+      "gridPos": {
+        "h": 20,
+        "w": 24,
+        "x": 0,
+        "y": 79
+      },
+      "hideEmpty": false,
+      "hideZero": true,
+      "id": 54,
+      "initialZoom": "2.5",
+      "locationData": "countries",
+      "mapCenter": "custom",
+      "mapCenterLatitude": "6",
+      "mapCenterLongitude": "20",
+      "maxDataPoints": 1,
+      "mouseWheelZoom": false,
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "metric",
+        "queryType": "geohash"
+      },
+      "targets": [
+        {
+          "expr": "sum by (code) (coronavirus_active_cases)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{code}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "100,10000",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "World Map(Active Cases) ",
+      "transparent": true,
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "valueName": "current"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "India",
+          "value": "India"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(coronavirus_active_cases, country)",
+        "hide": 0,
+        "includeAll": false,
+        "index": -1,
+        "label": null,
+        "multi": false,
+        "name": "country",
+        "options": [],
+        "query": "label_values(coronavirus_active_cases, country)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "24h",
+          "value": "24h"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "duration",
+        "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "15m",
+            "value": "15m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "3h",
+            "value": "3h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": true,
+            "text": "24h",
+            "value": "24h"
+          },
+          {
+            "selected": false,
+            "text": "1w",
+            "value": "1w"
+          },
+          {
+            "selected": false,
+            "text": "2w",
+            "value": "2w"
+          }
+        ],
+        "query": "1m,5m,15m,30m,1h,3h,6h,12h,24h,1w,2w",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Realtime COVID 19 Dashboard (World and Countrywise Stats)",
+  "uid": "HoxTzz9Wk",
+  "variables": {
+    "list": []
+  },
+  "version": 49
+}

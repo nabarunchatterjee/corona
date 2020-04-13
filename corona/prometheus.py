@@ -46,6 +46,9 @@ class Collector(object):
             region = country_stat["region"]
             for key, value in country_stat.items():
                 if key not in ["country_name", "region"]:
+                    # print(key,country, value)
+                    if value == "N/A":
+                        value = "0"
                     clean_value = float(value.replace(",", ""))
                     metric_name = self._metric_prefix + key
                     if country not in country_code_map:

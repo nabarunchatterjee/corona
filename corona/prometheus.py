@@ -26,7 +26,7 @@ class Collector(object):
 
         for key, value in world_stats.items():
             if key != "statistic_taken_at":
-                clean_value = int(value.replace(",", ""))
+                clean_value = float(value.replace(",", ""))
                 metric_name = self._metric_prefix + key
                 metric = GaugeMetricFamily(metric_name,
                                            "%s for coronavirus" % key,

@@ -1,14 +1,8 @@
 import React, { Component } from "react";
+import MenuItem from "@mui/material/MenuItem";
 
-class CountryDetails extends Component {
-    render() {
-        return (
-            <li key={this.props.country}>
-                {this.props.country}: {this.props.cases}
-            </li>
-        );
-    }
-}
+import CountryDetails from "./country_details.js";
+import CountrySelect from "./country_select.js";
 
 export default class CoronavirusData extends Component {
     constructor(props) {
@@ -17,6 +11,7 @@ export default class CoronavirusData extends Component {
         this.make_url = this.make_url.bind(this);
         this.make_request = this.make_request.bind(this);
         this.getCasesByCountry = this.getCasesByCountry.bind(this);
+        this.handleValueChange = this.handleValueChange.bind(this);
         this.urls = {
             casesByCountry: this.make_url("cases_by_country"),
             worldStats: this.make_url("worldstat"),
@@ -32,6 +27,8 @@ export default class CoronavirusData extends Component {
 
         this.state = {
             stats: {},
+            country: "India",
+            cd: {},
         };
     }
 
@@ -56,25 +53,57 @@ export default class CoronavirusData extends Component {
     }
 
     componentDidMount() {
-        this.getCasesByCountry();
+        this.getCasesByCountry(this.state.country);
+        this.getCountries();
     }
 
-    getCasesByCountry() {
+    getCountries() {
+        var country_menu = [];
         const resPromise = this.stats.casesByCountry;
         resPromise.then((result) => {
-            let count_dets = result.countries_stat.map((det, i) => {
-                return (
-                    <CountryDetails key={det.country_name}
-                        country={det.country_name}
-                        cases={det.cases}
-                    />
+            result.countries_stat.forEach((country_dets) => {
+                country_menu.push(
+                    <MenuItem
+                        key={country_dets.country_name}
+                        value={country_dets.country_name}
+                    >
+                        {country_dets.country_name}
+                    </MenuItem>
                 );
             });
-            this.setState({ cd: count_dets });
+            this.setState({ cm: country_menu });
         });
     }
 
+    getCasesByCountry(country) {
+        const resPromise = this.stats.casesByCountry;
+        resPromise.then((result) => {
+            let count_dets = result.countries_stat.find(dets => dets.country_name === country);
+            this.setState({
+                country: country,
+                cd: count_dets,
+            });
+        });
+    }
+
+    handleValueChange(event) {
+        this.getCasesByCountry(event.target.value);
+    }
+
     render() {
-        return <ul>{this.state.cd}</ul>;
+        return (
+            <div className="container">
+                <CountrySelect
+                    countries={this.state.cm}
+                    value={this.state.country}
+                    onValueChange={this.handleValueChange}
+                />
+
+                <CountryDetails
+                    country={this.state.country}
+                    details={this.state.cd}
+                />
+            </div>
+        );
     }
 }

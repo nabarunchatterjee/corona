@@ -8,7 +8,7 @@ function App() {
             <TopBar />
             <CoronavirusData
                 host="coronavirus-monitor.p.rapidapi.com"
-                api_key="rvy6OR8SFOjlCcMXB7uGNKXGaPC5OW06"
+                api_key={process.env.REACT_APP_API_KEY}
                 country="India"
             />
         </div>

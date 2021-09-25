@@ -1,7 +1,7 @@
 import React from "react";
-import {Select} from "@mui/material";
-import {FormControl} from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Select } from "@mui/material";
+import { FormControl } from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
 import { useMinimalSelectStyles } from "@mui-treasury/styles/select/minimal";
 
 const CountrySelect = (props) => {
@@ -9,7 +9,7 @@ const CountrySelect = (props) => {
 
     const iconComponent = (props) => {
         return (
-            <ExpandMoreIcon
+            <ExpandMore
                 className={props.className + " " + minimalSelectClasses.icon}
             />
         );

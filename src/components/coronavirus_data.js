@@ -78,7 +78,9 @@ export default class CoronavirusData extends Component {
     getCasesByCountry(country) {
         const resPromise = this.stats.casesByCountry;
         resPromise.then((result) => {
-            let count_dets = result.countries_stat.find(dets => dets.country_name === country);
+            let count_dets = result.countries_stat.find(
+                (dets) => dets.country_name === country
+            );
             this.setState({
                 country: country,
                 cd: count_dets,
